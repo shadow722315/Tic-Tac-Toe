@@ -233,6 +233,15 @@ function bot() {
             }
         }
     }
+
+    // 5. Last Hope
+
+    for (let i = 0 ; i < board.length; i++) {
+        if (board[i] === "") {
+            placeO(i);
+            return;
+        }
+    }
 }
 
 // place function to keep it clean
@@ -250,6 +259,7 @@ function placeO(idx) {
     checkWin();
 
 }
+
 
 
 
