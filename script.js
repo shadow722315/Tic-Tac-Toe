@@ -93,7 +93,7 @@ function checkWin() {
             } else if (board[a] === "O") {
                 console.log("You lost!");
                 setTimeout(() => {
-                    document.querySelector(".textLost").classList.add("PlayAgain1");
+                    Losttext.classList.add("PlayAgain1");
                 }, 300);
             }
 
@@ -250,5 +250,6 @@ function placeO(idx) {
     checkWin();
 
 }
+
 
 
