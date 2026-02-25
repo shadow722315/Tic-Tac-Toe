@@ -20,6 +20,9 @@ const board = ["", "", "",
 let game = true
 let NotDraw = true
 
+// impossible mode code part
+const AdvBlockArray = [[0,8],[2,6],[1,3], [5,7], [1,5], [3,7]];
+
 
 
 
@@ -93,7 +96,7 @@ function checkWin() {
             } else if (board[a] === "O") {
                 console.log("You lost!");
                 setTimeout(() => {
-                    Losttext.classList.add("PlayAgain1");
+                    document.querySelector(".textLost").classList.add("PlayAgain1");
                 }, 300);
             }
 
@@ -163,7 +166,7 @@ function bot() {
 
 
     //1. Win
-        for (let i = 0; i < winningcombinations.length; i++) {
+    for (let i = 0; i < winningcombinations.length; i++) {
         let combo = winningcombinations[i];
         let a = combo[0];
         let b = combo[1];
@@ -189,7 +192,7 @@ function bot() {
 
 
         // Block
-        for (let i = 0; i < winningcombinations.length; i++) {
+    for (let i = 0; i < winningcombinations.length; i++) {
         let combo = winningcombinations[i];
         let a = combo[0];
         let b = combo[1];
@@ -214,13 +217,52 @@ function bot() {
     }
 
 
-
-
     // 3. Center check
     if (board[4] === "") {
         placeO(4);
         console.log("Bot took the center!");
         return;
+    }
+
+    // Fork Check
+    for (let i = 0; i < AdvBlockArray.length; i++) {
+        let pair = AdvBlockArray[i];
+        let a = pair[0];
+        let b = pair[1];
+        if (a === 0 && b === 8 || a === 2 && b === 6) {
+            if (board[a] === "X" && board[b] === "X" && board[3] === "") {
+                placeO(3);
+                return;
+             }
+        }
+
+        if (a === 1 && b === 3) {
+            if (board[a] === "X" && board[b] === "X" && board[0] === "") {
+                placeO(0);
+                return;
+             }
+        }
+
+        if (a === 5 && b === 7) {
+            if (board[a] === "X" && board[b] === "X" && board[8] === "") {
+                placeO(8);
+                return;
+             }
+        }
+
+        if (a === 1 && b === 5) {
+            if (board[a] === "X" && board[b] === "X" && board[2] === "") {
+                placeO(2);
+                return;
+             }
+        }
+
+        if (a === 3 && b === 7) {
+            if (board[a] === "X" && board[b] === "X" && board[6] === "") {
+                placeO(6);
+                return;
+            }
+        }
     }
 
     // 4. Corner check
@@ -231,6 +273,7 @@ function bot() {
                 console.log("Bot took the corner");
                 return;
             }
+
         }
     }
 
@@ -259,7 +302,3 @@ function placeO(idx) {
     checkWin();
 
 }
-
-
-
-
